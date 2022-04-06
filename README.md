@@ -1,4 +1,4 @@
-#AWS Lambda Java Demo
+# AWS Lambda Java Demo
 This is a simple demo to show how AWS Lambda Functions works.
 This project also AWS CloudFormation to simplify deployment
 and Gradle to build and package executable artifact.
