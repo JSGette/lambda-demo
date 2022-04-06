@@ -1,11 +1,14 @@
 package com.hft.example;
 
+import com.amazonaws.regions.InMemoryRegionImpl;
+import com.amazonaws.regions.Region;
 import com.amazonaws.services.lambda.runtime.Context;
 import com.amazonaws.services.lambda.runtime.LambdaLogger;
 import com.amazonaws.services.lambda.runtime.RequestHandler;
 import com.amazonaws.services.lambda.runtime.events.S3Event;
 import com.amazonaws.services.lambda.runtime.events.models.s3.S3EventNotification;
 import com.amazonaws.services.s3.AmazonS3;
+import com.amazonaws.services.s3.AmazonS3Client;
 import com.amazonaws.services.s3.AmazonS3ClientBuilder;
 import com.amazonaws.services.s3.model.GetObjectRequest;
 import com.amazonaws.services.s3.model.ObjectMetadata;
@@ -23,7 +26,9 @@ public class LambdaHandler implements RequestHandler<S3Event, String> {
         logger.log("Bucket Event detected: " + bucket);
         String objectKey = record.getS3().getObject().getUrlDecodedKey();
         logger.log("New file has been added: " + objectKey);
-        AmazonS3 s3Client = AmazonS3ClientBuilder.defaultClient();
+        AmazonS3 s3Client = AmazonS3Client.builder()
+                .withRegion(record.getAwsRegion())
+                .build();
         S3Object s3Object = s3Client.getObject(new GetObjectRequest(bucket, objectKey));
         InputStream objectData = s3Object.getObjectContent();
         BufferedReader reader = new BufferedReader(new InputStreamReader(objectData));
