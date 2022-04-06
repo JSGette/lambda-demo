@@ -13,7 +13,7 @@ Resources:
       Runtime: java11
       Description: Java function
       MemorySize: 128
-      Timeout: 20
+      Timeout: 60
       Policies:
         - AWSLambdaBasicExecutionRole
         - AWSLambda_ReadOnlyAccess
