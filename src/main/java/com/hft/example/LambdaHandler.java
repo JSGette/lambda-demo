@@ -27,7 +27,6 @@ public class LambdaHandler implements RequestHandler<S3Event, String> {
         S3Object s3Object = s3Client.getObject(new GetObjectRequest(bucket, objectKey));
         InputStream objectData = s3Object.getObjectContent();
         BufferedReader reader = new BufferedReader(new InputStreamReader(objectData));
-        logger.log("Reader: " + reader);
         try {
             String content = reader.readLine();
             if (!content.contains("+")) {
