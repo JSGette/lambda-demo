@@ -4,7 +4,6 @@ Description: Small AWS Lambda Demo Template.
 Resources:
   bucket:
     Type: AWS::S3::Bucket
-    DeletionPolicy: Retain
   function:
     Type: AWS::Serverless::Function
     Properties:
